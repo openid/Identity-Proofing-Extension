@@ -136,11 +136,19 @@ To eliminate runtime network latency and protect user privacy, Verifiers MUST de
 ## 9.0 IANA Considerations
 
 ### 9.1 JSON Web Token Claims Registration
-This specification requests registration of the following value in the IANA "JSON Web Token Claims Registry" established by [@!RFC7519]
+This specification requests registration of the following value in the IANA "JSON Web Token Claims Registry" established by [@!RFC7519]. These registrations standardize the semantic representation of how an identity was vetted and proofed prior to issuance, allowing Relying Parties to evaluate identity proofing rigor across format-agnostic architectures.
 
-### Registry Contents
-#### Claim `verified_claims` 
-Claim Name
+**Registry Name:** JSON Web Token Claims
+**Change Controller:** OpenID Foundation
+**Specification Document:** [[ This Document ]]
+
+| Claim Name | Claim Description | Change Controller | Specification Document(s) |
+| :--- | :--- | :--- | :--- |
+| `context_uri` | Defines the legal or regulatory standard governing the initial identity proofing. | OpenID Foundation | [[ This Document ]] |
+| `presence_equivalence` | Indicates the context of the user's presence during the initial proofing phase. | OpenID Foundation | [[ This Document ]] |
+| `issuance_assurance_classification` | Asserts the vetting rigor and confidence established by the Issuer at the time of issuance. | OpenID Foundation | [[ This Document ]] |
+| `proofing_level` | Harmonized mapping representing the Identity Assurance Level (IAL) or Identity Proofing (IP) level. | OpenID Foundation | [[ This Document ]] |
+| `check_method` | The verification methodology used by the Issuer to validate the identity evidence during onboarding. | OpenID Foundation | [[ This Document ]] | 
 
 ### 9.2 CBOR Web Token (CWT) Claims Registration
 This specification requests registration of the following value in the IANA "CBOR Web Token Claims Registry" established by [@!RFC8392]. These registrations provide integer-based claim keys for the Format-Agnostic Identity Core Vocabulary, enabling high-assurance identity proffing and cryptographich pass-through evidence to be transmitted efficianetly in edge-native constrained environments.
@@ -148,18 +156,20 @@ This specification requests registration of the following value in the IANA "CBO
 Registry Name: CBOR Web Token (CWT) Claims
 Change Controller: OpenID Foundation (or IETF, depending on the final submission track)
 Specification Document: [[ This Document ]]
-Claim Name,Claim Description,JWT Claim Name,Claim Key
-context_uri,Defines the legal/regulatory standard governing the initial proofing.,context_uri,[TBD]
-presence_equivalence,Indicates the context of the user's presence during proofing.,presence_equivalence,[TBD]
-issuance_assurance_classification,Asserts the vetting rigor and confidence established by the Issuer.,issuance_assurance_classification,[TBD]
-proofing_level,Harmonized mapping representing the Identity Assurance Level.,proofing_level,[TBD]
-check_method,The verification methodology used during onboarding.,check_method,[TBD]
-issuer_signed_receipt,Raw structure from the root token proving the trust anchor.,issuer_signed_receipt,[TBD]
-device_signed_receipt,Raw structure proving localized hardware intent and non-repudiation.,device_signed_receipt,[TBD]
-verifier_signature_attestation,Cryptographic signature of an intermediate Verifier translation.,verifier_signature_attestation,[TBD]
-revocation_freshness_check,Timestamp confirming the exact moment the credential's status was validated.,revocation_freshness_check,[TBD]
-revocation_freshness_method,Mechanism used to validate the credential's status.,revocation_freshness_method,[TBD]
-device_binding_verified,Declares whether the presentation key is securely bound to hardware.,device_binding_verified,[TBD]
+
+| Claim Name | Claim Description | JWT Claim Name | Claim Key |
+| :--- | :--- | :--- | :--- |
+| `context_uri` | Defines the legal/regulatory standard governing the initial proofing. | `context_uri` | `[TBD]` |
+| `presence_equivalence` | Indicates the context of the user's presence during proofing. | `presence_equivalence` | `[TBD]` |
+| `issuance_assurance_classification` | Asserts the vetting rigor and confidence established by the Issuer. | `issuance_assurance_classification` | `[TBD]` |
+| `proofing_level` | Harmonized mapping representing the Identity Assurance Level. | `proofing_level` | `[TBD]` |
+| `check_method` | The verification methodology used during onboarding. | `check_method` | `[TBD]` |
+| `issuer_signed_receipt` | Raw structure from the root token proving the trust anchor. | `issuer_signed_receipt` | `[TBD]` |
+| `device_signed_receipt` | Raw structure proving localized hardware intent and non-repudiation. | `device_signed_receipt` | `[TBD]` |
+| `verifier_signature_attestation` | Cryptographic signature of an intermediate Verifier translation. | `verifier_signature_attestation` | `[TBD]` |
+| `revocation_freshness_check` | Timestamp confirming the exact moment the credential's status was validated. | `revocation_freshness_check` | `[TBD]` |
+| `revocation_freshness_method` | Mechanism used to validate the credential's status. | `revocation_freshness_method` | `[TBD]` |
+| `device_binding_verified` | Declares whether the presentation key is securely bound to hardware. | `device_binding_verified` | `[TBD]` |
 
 Note to RFC Editor: Please replace [TBD] with the integer values assigned by IANA, typically allocated from the standard specification space (e.g., negative integers for early allocations or standard positive integers post-RFC).
 
