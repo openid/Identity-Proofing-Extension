@@ -76,10 +76,7 @@ To enable cross-format interoperability of proofing claims, implementations MUST
 
 ## Proofing Assurance Classifications
 * **`issuance_assurance_classification`**: The specific vetting standard met at the time of issuance (e.g., `status:full_compliance:us:real_id`, `loa:high:eu:eidas`). This serves as the primary integer weight representing the Issuer's proofing rigor.
-
-# Standardized Claims and Values Registry (Normative)
-To enable true jurisdictional agility and non-repudiation, Issuers and Verifiers MUST map local proofing terminology and downstream translation assertions to this standardized registry of claims and enumerated values. This registry is strictly divided into two operational domains.
-
+  
 ---
 ### 5.2. The Cryptographic Security & Presentation Domain
 
