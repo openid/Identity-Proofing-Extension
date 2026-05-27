@@ -25,7 +25,7 @@ This document is a targeted profile of the Format-Agnostic Digital Identity Clai
 
 The digital identity ecosystem is heavily fragmented across root cryptographic formats (e.g., CBOR for ISO/IEC 18013-5 mdocs, JSON-LD for W3C VCDMs) and transport protocols. 
 
-To solve the utility problem across all enterprise architectures, this specification decouples the **Vocabulary** from the **Protocol**. It standardizes the specific claims necessary to evaluate identity proofing rigor and end-to-end non-repudiation. Implementers can natively embed these claims into edge-based binary protocols or translate them into enterprise-friendly web formats via intermediate orchestration services.
+To solve the utility problem across all enterprise architectures, this specification decouples the **Claims** from the **Protocol**. It standardizes the specific claims necessary to evaluate identity proofing rigor and end-to-end non-repudiation. Implementers can natively embed these claims into edge-based binary protocols or translate them into enterprise-friendly web formats via intermediate orchestration services.
 
 # 2.0 Scope
 
