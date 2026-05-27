@@ -49,7 +49,6 @@ TBD
 To enable true jurisdictional agility and non-repudiation, Issuers and Verifiers MUST map local proofing terminology and downstream translation assertions to this standardized registry of claims and enumerated values. This registry is strictly divided into two operational domains: Identity Proofing and Cryptographic Security.
 
 ### 5.1 The Identity Proofing Domain: Vetting & Assurance Claims
-
 These claims are asserted by the Issuer and describe the rigor of the initial onboarding phase. 
 
 #### Context & Environmental Claims
@@ -74,9 +73,6 @@ To enable cross-format interoperability of proofing claims, implementations MUST
 * **ISO/IEC 18013-5/7 (CBOR mdoc):** `org.openid.ida.assurance.1`
 * **W3C Verifiable Credentials (JSON/SD-JWT):** `assurance_level` property mapped within the credential `@context`.
 
-## Proofing Assurance Classifications
-* **`issuance_assurance_classification`**: The specific vetting standard met at the time of issuance (e.g., `status:full_compliance:us:real_id`, `loa:high:eu:eidas`). This serves as the primary integer weight representing the Issuer's proofing rigor.
-  
 ---
 ### 5.2. The Cryptographic Security & Presentation Domain
 
@@ -106,6 +102,10 @@ For RPs operating physical hardware (e.g., POS terminals, offline readers) consu
 ### 6.2 Translation Binding (e.g., Web-Native OpenID Connect)
 For web-native enterprise RPs (e.g., Core Banking Systems) that lack the capacity to process heavy binary protocols or manage edge device engagement, an intermediate Verifier is utilized. The Verifier executes the complex cryptography and translates the Core Vocabulary into a normalized JSON payload. 
 
+How the Verifier Uses This Table
+When an orchestration gateway sits between the edge and a Relying Party's enterprise backend, this IANA registry acts as the definitive translation map.
+If the Verifier receives a CBOR payload over ISO 18013-7, it doesn't look for the string "proofing_level". It parses the binary for the assigned integer key (e.g., -260). Upon validating the math, it cross-references this IANA registry, sees that -260 perfectly maps to the JWT claim "proofing_level", and injects that string into the normalized OpenID Connect JSON envelope for the Relying Party. This ensures complete semantic parity between the physical edge and the enterprise web.
+
 * **Encoding Mandate:** When utilizing a JSON translation binding, all non-JSON cryptographic structures (e.g., CBOR MSO blocks) mapped to `issuer_signed_receipt` and `device_signed_receipt` MUST be encoded (e.g., Base64URL) to allow safe nesting within the JSON envelope.
 
 ## 7. Security Considerations
@@ -129,9 +129,6 @@ Establish a standardized, format-agnostic namespace (e.g., `org.openid.ida.assur
 ### 8.2 Selective Disclosure Request
 RPs SHOULD explicitly request proofing data elements from this namespace via Selective Disclosure during the presentation phase to evaluate the native assurance level of the Issuer's vetting process prior to full PII payload presentation and extraction.
 
-### 8.3 Decoupled Trust Resolution (Asynchronous VICAL Caching)
-To eliminate runtime network latency and protect user privacy, Verifiers MUST decouple the transaction path from the trust list resolution path. Verifiers MUST NOT execute synchronous, blocking inline API calls to a Verified Issuer Certificate Authority List (VICAL) registry during a live transaction. Verifiers MUST operate on an asynchronously cached instance of the VICAL, updated out-of-band via background synchronization or webhook architectures.
-
 ---
 ## 9.0 IANA Considerations
 
@@ -151,7 +148,7 @@ This specification requests registration of the following value in the IANA "JSO
 | `check_method` | The verification methodology used by the Issuer to validate the identity evidence during onboarding. | OpenID Foundation | [[ This Document ]] | 
 
 ### 9.2 CBOR Web Token (CWT) Claims Registration
-This specification requests registration of the following value in the IANA "CBOR Web Token Claims Registry" established by [@!RFC8392]. These registrations provide integer-based claim keys for the Format-Agnostic Identity Core Vocabulary, enabling high-assurance identity proffing and cryptographich pass-through evidence to be transmitted efficianetly in edge-native constrained environments.
+This specification requests registration of the following value in the IANA "CBOR Web Token Claims Registry" established by [@!RFC8392]. These registrations provide integer-based claim keys for the Format-Agnostic Identity Core Vocabulary, enabling high-assurance identity proofing and cryptographic pass-through evidence to be transmitted efficiently in edge-native constrained environments.
 
 Registry Name: CBOR Web Token (CWT) Claims
 Change Controller: OpenID Foundation (or IETF, depending on the final submission track)
@@ -173,10 +170,6 @@ Specification Document: [[ This Document ]]
 
 Note to RFC Editor: Please replace [TBD] with the integer values assigned by IANA, typically allocated from the standard specification space (e.g., negative integers for early allocations or standard positive integers post-RFC).
 
-How the Verifier Uses This Table
-When an orchestration gateway sits between the edge and a Relying Party's enterprise backend, this IANA registry acts as the definitive translation map.
-If the Verifier receives a CBOR payload over ISO 18013-7, it doesn't look for the string "proofing_level". It parses the binary for the assigned integer key (e.g., -260). Upon validating the math, it cross-references this IANA registry, sees that -260 perfectly maps to the JWT claim "proofing_level", and injects that string into the normalized OpenID Connect JSON envelope for the Relying Party.
-This ensures complete semantic parity between the physical edge and the enterprise web.
 
 # Annex A (Informative) Acknowledgement
 
