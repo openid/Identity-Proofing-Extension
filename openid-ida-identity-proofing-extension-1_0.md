@@ -1,9 +1,5 @@
-%%%
-title = "Format-Agnostic Digital Identity Claims and Values: Identity Proofing Profile 1.0 - draft 00"
-abbrev = "Format-Agnostic Identity Claims and Values"
-ipr = "none"
-workgroup = "OpenID eKYC-IDA"
-keyword = ["security", "openid", "identity assurance", "ekyc", "claims", "mdoc", "vcdm", "format-agnostic"]
+%%% title = "Format-Agnostic Digital Identity Claims and Values: Core Vocabulary 1.0 - draft 02" abbrev = "Format-Agnostic Identity Core Vocabulary" ipr = "none" workgroup = "OpenID eKYC-IDA" keyword = ["security", "openid", "identity assurance", "ekyc", "claims", "mdoc", "vcdm", "format-agnostic", "data-dictionary"]
+[seriesInfo] name = "Internet-Draft" value = "openid-ida-core-vocabulary-1_0" status = "standard"
 
 [seriesInfo]
 name = "Internet-Draft"
