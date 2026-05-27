@@ -90,7 +90,7 @@ These claims establish the active trust architecture at the moment of presentati
 
 ## 6. Architectural Binding Profiles (Implementation Mechanics)
 
-Because this Core Vocabulary is protocol-independent, Relying Parties MUST consume these claims via an architecture-appropriate Implementation Profile. 
+Because this specification is protocol-independent, Relying Parties MUST consume these claims via an architecture-appropriate Implementation Profile. 
 
 ### 6.1 Native Edge Binding (e.g., Proximity Terminals)
 For RPs operating physical hardware (e.g., POS terminals, offline readers) consuming ISO/IEC 18013-5 over BLE/NFC, no format translation is required. The RP consumes the raw CBOR binary directly. The Core Vocabulary is parsed natively from the `org.openid.ida.assurance.1` namespace.
