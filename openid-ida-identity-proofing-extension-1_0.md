@@ -37,7 +37,7 @@ This specification defines the discrete claims, data types, and enumerated value
 1. The identity proofing and vetting phase executed by an Issuing Authority.
 2. The cryptographic pass-through evidence required to maintain non-repudiation through intermediate translation layers.
 
-**Out of Scope:** The specific transport protocol, API definitions, or envelope formatting (e.g., JSON OIDC assertions, REST APIs, BLE/NFC handshakes) used to deliver these claims. Those mechanics MUST be defined in separate, architecture-specific **Profiles**.
+**Out of Scope:** The specific transport protocol, API definitions, or envelope formatting (e.g., JSON OIDC assertions, REST APIs, BLE/NFC handshakes) used to deliver these claims. Those mechanics MUST be defined in separate, architecture-specific Profiles.
 
 # 3.0 Normative References 
 TBD
