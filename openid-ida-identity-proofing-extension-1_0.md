@@ -96,7 +96,7 @@ Because this specification is protocol-independent, Relying Parties MUST consume
 For RPs operating physical hardware (e.g., POS terminals, offline readers) consuming ISO/IEC 18013-5 over BLE/NFC, no format translation is required. The RP consumes the raw CBOR binary directly. The Core Vocabulary is parsed natively from the `org.openid.ida.assurance.1` namespace.
 
 ### 6.2 Translation Binding (e.g., Web-Native OpenID Connect)
-For web-native enterprise RPs (e.g., Core Banking Systems) that lack the capacity to process heavy binary protocols or manage edge device engagement, an intermediate Verifier is utilized. The Verifier executes the complex cryptography and translates the Core Vocabulary into a normalized JSON payload. 
+For web-native enterprise RPs (e.g., Core Banking Systems) that lack the capacity to process heavy binary protocols or manage edge device engagement, an intermediate Verifier is utilized. The Verifier executes the complex cryptography and translates the claims and values into a normalized JSON payload. 
 
 How the Verifier Uses This Table
 When an orchestration gateway sits between the edge and a Relying Party's enterprise backend, this IANA registry acts as the definitive translation map.
