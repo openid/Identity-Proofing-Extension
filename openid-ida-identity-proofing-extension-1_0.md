@@ -25,9 +25,6 @@ organization="Independent"
 This document is a targeted profile of the Format-Agnostic Digital Identity Claims and Values 1.0 specification. It isolates and defines the globally interoperable architecture of digital identity claims and values. Crucially, this profile explicitly separates the claims related to **Identity Proofing assurance** (how the human was originally vetted by the Issuer) from the **Cryptographic Security** claims (how the assertion is protected during transit). By standardizing the semantic representation of these two distinct domains, and defining the requirements for end-to-end cryptographic non-repudiation through intermediate translation layers, this profile empowers Relying Parties (RPs) to solve the utility problem—executing automated, risk-defensible decisions based on strict mathematical proof.
 
 
-{mainmatter}
-
-
 # 1.0 Introduction
 
 The digital identity ecosystem is heavily fragmented across root cryptographic formats (e.g., CBOR for ISO/IEC 18013-5 mdocs, JSON-LD for W3C VCDMs) and transport protocols. 
