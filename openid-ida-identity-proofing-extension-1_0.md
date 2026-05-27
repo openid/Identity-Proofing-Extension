@@ -99,7 +99,7 @@ For RPs operating physical hardware (e.g., POS terminals, offline readers) consu
 For web-native enterprise RPs (e.g., Core Banking Systems) that lack the capacity to process heavy binary protocols or manage edge device engagement, an intermediate Verifier is utilized. The Verifier executes the complex cryptography and translates the claims and values into a normalized JSON payload. 
 
 How the Verifier Uses This Table
-When an orchestration gateway sits between the edge and a Relying Party's enterprise backend, this IANA registry acts as the definitive translation map.
+When a Verifier sits between the Wallet and a Relying Party's enterprise backend, this IANA registry acts as the definitive translation map.
 If the Verifier receives a CBOR payload over ISO 18013-7, it doesn't look for the string "proofing_level". It parses the binary for the assigned integer key (e.g., -260). Upon validating the math, it cross-references this IANA registry, sees that -260 perfectly maps to the JWT claim "proofing_level", and injects that string into the normalized OpenID Connect JSON envelope for the Relying Party. This ensures complete semantic parity between the physical edge and the enterprise web.
 
 * **Encoding Mandate:** When utilizing a JSON translation binding, all non-JSON cryptographic structures (e.g., CBOR MSO blocks) mapped to `issuer_signed_receipt` and `device_signed_receipt` MUST be encoded (e.g., Base64URL) to allow safe nesting within the JSON envelope.
