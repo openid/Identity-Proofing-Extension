@@ -45,8 +45,8 @@ TBD
 # 4.0 Terms and Definitions
 TBD
 
-# 5.0 Standardized Parameter Value Registry (Normative)
-To enable cross-format interoperability, implementations MUST utilize the registered OpenID IDA Assurance namespace (e.g., `org.openid.ida.assurance.1` in CBOR, or `assurance_level` mapped within a JSON `@context`), regardless of the final transport binding.
+# 5.0 Standardized Claims and Values Registry (Normative)
+To enable true jurisdictional agility and non-repudiation, Issuers and Verifiers MUST map local proofing terminology and downstream translation assertions to this standardized registry of claims and enumerated values. This registry is strictly divided into two operational domains: Identity Proofing and Cryptographic Security.
 
 ### 5.1 The Identity Proofing Domain: Vetting & Assurance Claims
 
