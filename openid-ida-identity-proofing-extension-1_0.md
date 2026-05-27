@@ -112,10 +112,7 @@ If a Relying Party utilizes an intermediate Verifier and a Translation Binding (
 The RP MUST NOT treat the JSON translation as the absolute root of trust. The RP MUST extract and archive the format-agnostic cryptographic evidence contained within the `issuer_signed_receipt` and `device_signed_receipt` fields. While the RP consumes JSON for operational speed, the retained encoded binary receipts provide the immutable proof required for KYC Examiner Defence.
 
 ### 7.2 Decoupled Trust Resolution (Asynchronous Caching)
-To eliminate runtime network latency and protect user privacy, architectures processing these claims SHOULD decouple the transaction path from the trust list resolution path. Synchronous API calls to a Verified Issuer Certificate Authority List (VICAL) during a live transaction introduce severe availability risks. `revocation_freshness_method` MUST be evaluated by the RP to determine if the trust resolution was performed via an asynchronous, locally cached registry (preferred) or a synchronous network call.
-
-### 7.3 Audience Binding and Replay Protection
-When claims are decoupled from their physical hardware stack (e.g., translated into a bearer token), they are vulnerable to interception and replay. The presentation MUST contain a cryptographically secure, single-use `nonce` bound to the ultimate Relying Party's client identifier. The hardware `device_signed_receipt` MUST explicitly sign over this destination-specific nonce to prevent intermediate replay.
+To eliminate runtime network latency and protect user privacy, architectures processing these claims SHOULD decouple the transaction path from the trust list resolution path. Synchronous API calls to a Verified Issuer Certificate Authority List (VICAL) during a live transaction introduces severe availability risks. `revocation_freshness_method` MUST be evaluated by the RP to determine if the trust resolution was performed via an asynchronous, locally cached registry,a synchronous network call or the wallet itself.
 
 ## 8.0 Compliance Elements: Provenance & Jurisdictional Assurance
 
