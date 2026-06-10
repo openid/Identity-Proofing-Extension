@@ -1,5 +1,5 @@
 %%%
-title = "Format-Agnostic Digital Identity Claims and Values: Identity Proofing Profile 1.0 - draft 00"
+title = "Format-Agnostic Digital Identity Claims and Values: Identity Proofing Extension 1.0 - draft 00"
 abbrev = "Format-Agnostic Identity Claims and Values"
 ipr = "none"
 workgroup = "OpenID eKYC-IDA"
@@ -129,7 +129,7 @@ The RP MUST NOT treat the JSON translation as the absolute root of trust. The RP
 
 ## Decoupled Trust Resolution (Asynchronous Caching)
 
-To eliminate runtime network latency and protect user privacy, architectures processing these claims SHOULD decouple the transaction path from the trust list resolution path. Synchronous API calls to a Verified Issuer Certificate Authority List (VICAL) during a live transaction introduces severe availability risks. `revocation_freshness_method` MUST be evaluated by the RP to determine if the trust resolution was performed via an asynchronous, locally cached registry,a synchronous network call or the wallet itself.
+To eliminate runtime network latency and protect user privacy, architectures processing these claims SHOULD decouple the transaction path from the trust list resolution path. Synchronous API calls to a Verified Issuer Certificate Authority List (VICAL) during a live transaction introduces severe availability risks. `revocation_freshness_method` MUST be evaluated by the RP to determine if the trust resolution was performed via an asynchronous, locally cached registry, a synchronous network call or the wallet itself.
 
 # Compliance Elements: Provenance & Jurisdictional Assurance
 
