@@ -1,6 +1,6 @@
-# OIDC4IDA-Identity-Proofing-Extension
+# Identity-Proofing-Extension
 
-Format-Agnostic Digital Identity Claims and Values 1.0: Identity Proofing Profile
+Format-Agnostic Digital Identity Claims and Values: Identity Proofing Extension 1.0
 
 ## Builds
 
