@@ -4,7 +4,9 @@ Format-Agnostic Digital Identity Claims and Values: Identity Proofing Extension 
 
 ## Builds
 
-You can view the editor's copy of the spec at [https://openid.github.io/Identity-Proofing-Extension/main.html](https://openid.github.io/Identity-Proofing-Extension/main.html).
+The latest working group specification can be viewed at [https://openid.net/specs/openid-ida-identity-proofing-extension-1_0.html](https://openid.net/specs/openid-ida-identity-proofing-extension-1_0.html).
+
+You can view the editor's working draft of the spec at [https://openid.github.io/Identity-Proofing-Extension/main.html](https://openid.github.io/Identity-Proofing-Extension/main.html).
 
 Other branches are built and deployed as well, using the branch name as the html filename, as shown below:
 
