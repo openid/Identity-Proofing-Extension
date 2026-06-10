@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>Format-Agnostic Digital Identity Claims and Values: Identity Proofing Profile 1.0 - draft 00</title>
+<title>Format-Agnostic Digital Identity Claims and Values: Identity Proofing Extension 1.0 - draft 00</title>
 <meta content="Juliana Cafik" name="author">
 <meta content="
        This document is a targeted profile of the Format-Agnostic Digital Identity Claims and Values 1.0 specification. It isolates and defines the globally interoperable architecture of digital identity claims and values. Crucially, this profile explicitly separates the claims related to  Identity Proofing assurance  (how the human was originally vetted by the Issuer) from the  Cryptographic Security  claims (how the assertion is protected during transit). By standardizing the semantic representation of these two distinct domains, and defining the requirements for end-to-end cryptographic non-repudiation through intermediate translation layers, this profile empowers Relying Parties (RPs) to solve the problem of executing automated, risk-defensible decisions based on strict mathematical proof. 
@@ -1210,7 +1210,7 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left"></td>
 <td class="center">Format-Agnostic Identity Claims and Valu</td>
-<td class="right">May 2026</td>
+<td class="right">June 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Cafik</td>
@@ -1225,7 +1225,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID eKYC-IDA</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-05-27" class="published">27 May 2026</time>
+<time datetime="2026-06-10" class="published">10 June 2026</time>
     </dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
@@ -1236,7 +1236,7 @@ li > p:last-of-type:only-child {
 </dd>
 </dl>
 </div>
-<h1 id="title">Format-Agnostic Digital Identity Claims and Values: Identity Proofing Profile 1.0 - draft 00</h1>
+<h1 id="title">Format-Agnostic Digital Identity Claims and Values: Identity Proofing Extension 1.0 - draft 00</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This document is a targeted profile of the Format-Agnostic Digital Identity Claims and Values 1.0 specification. It isolates and defines the globally interoperable architecture of digital identity claims and values. Crucially, this profile explicitly separates the claims related to <strong>Identity Proofing assurance</strong> (how the human was originally vetted by the Issuer) from the <strong>Cryptographic Security</strong> claims (how the assertion is protected during transit). By standardizing the semantic representation of these two distinct domains, and defining the requirements for end-to-end cryptographic non-repudiation through intermediate translation layers, this profile empowers Relying Parties (RPs) to solve the problem of executing automated, risk-defensible decisions based on strict mathematical proof.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
@@ -1646,7 +1646,7 @@ If the Verifier receives a CBOR payload over ISO 18013-7, it doesn't look for th
         <h3 id="name-decoupled-trust-resolution-">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-decoupled-trust-resolution-" class="section-name selfRef">Decoupled Trust Resolution (Asynchronous Caching)</a>
         </h3>
-<p id="section-5.2-1">To eliminate runtime network latency and protect user privacy, architectures processing these claims SHOULD decouple the transaction path from the trust list resolution path. Synchronous API calls to a Verified Issuer Certificate Authority List (VICAL) during a live transaction introduces severe availability risks. <code>revocation_freshness_method</code> MUST be evaluated by the RP to determine if the trust resolution was performed via an asynchronous, locally cached registry,a synchronous network call or the wallet itself.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-1">To eliminate runtime network latency and protect user privacy, architectures processing these claims SHOULD decouple the transaction path from the trust list resolution path. Synchronous API calls to a Verified Issuer Certificate Authority List (VICAL) during a live transaction introduces severe availability risks. <code>revocation_freshness_method</code> MUST be evaluated by the RP to determine if the trust resolution was performed via an asynchronous, locally cached registry, a synchronous network call or the wallet itself.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
