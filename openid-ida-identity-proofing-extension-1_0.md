@@ -161,7 +161,7 @@ This specification requests registration of the following value in the IANA "JSO
 
 ## CBOR Web Token (CWT) Claims Registration
 
-This specification requests registration of the following value in the IANA "CBOR Web Token Claims Registry" established by [@!RFC8392]. These registrations provide integer-based claim keys for the Format-Agnostic Identity Core Vocabulary, enabling high-assurance identity proofing and cryptographic pass-through evidence to be transmitted efficiently in edge-native constrained environments.
+This specification requests registration of the following value in the IANA "CBOR Web Token Claims Registry" established by [RFC8392]. These registrations provide integer-based claim keys for the Format-Agnostic Identity Core Vocabulary, enabling high-assurance identity proofing and cryptographic pass-through evidence to be transmitted efficiently in edge-native constrained environments.
 
 Registry Name: CBOR Web Token (CWT) Claims
 Change Controller: OpenID Foundation (or IETF, depending on the final submission track)
@@ -174,9 +174,6 @@ Specification Document: [[ This Document ]]
 | `issuance_assurance_classification` | Asserts the vetting rigor and confidence established by the Issuer. | `issuance_assurance_classification` | `[TBD]` |
 | `proofing_level` | Harmonized mapping representing the Identity Assurance Level. | `proofing_level` | `[TBD]` |
 | `check_method` | The verification methodology used during onboarding. | `check_method` | `[TBD]` |
-| `issuer_signed_receipt` | Raw structure from the root token proving the trust anchor. | `issuer_signed_receipt` | `[TBD]` |
-| `device_signed_receipt` | Raw structure proving localized hardware intent and non-repudiation. | `device_signed_receipt` | `[TBD]` |
-| `verifier_signature_attestation` | Cryptographic signature of an intermediate Verifier translation. | `verifier_signature_attestation` | `[TBD]` |
 | `revocation_freshness_check` | Timestamp confirming the exact moment the credential's status was validated. | `revocation_freshness_check` | `[TBD]` |
 | `revocation_freshness_method` | Mechanism used to validate the credential's status. | `revocation_freshness_method` | `[TBD]` |
 | `device_binding_verified` | Declares whether the presentation key is securely bound to hardware. | `device_binding_verified` | `[TBD]` |
