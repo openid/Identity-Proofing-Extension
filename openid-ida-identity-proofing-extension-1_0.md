@@ -67,10 +67,13 @@ These claims are asserted by the Issuer and describe the rigor of the initial on
 | `proofing_level` | `ial:2`, `ip:3` | String | Harmonized mapping representing the Identity Assurance Level (IAL). |
 
 ### Proofing Verification Methods (`check_method`)
+The values in the table below are conveyed via the `check_method` claim registered in the IANA JWT and CWT tables later in this document.
 
-| Value Category | Example Parameter Values | Description |
+| Claim | Value | Description |
 | :--- | :--- | :--- |
-| **Proofing** | `pipp`, `uripp`, `sripp` | Physical In-Person Proofing (`pipp`), Unsupervised Remote (`uripp`), Supervised Remote (`sripp`). |
+| `check_method` | `pipp` | Physical In-Person Proofing |
+| `check_method` | `uripp` | Unsupervised Remote In-Person Proofing |
+| `check_method` | `sripp` | Supervised Remote In-Person Proofing |
 
 ### Assurance Namespace
 
