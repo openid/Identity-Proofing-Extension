@@ -1470,24 +1470,43 @@ li > p:last-of-type:only-child {
           <h4 id="name-proofing-verification-metho">
 <a href="#section-3.1.3" class="section-number selfRef">3.1.3. </a><a href="#name-proofing-verification-metho" class="section-name selfRef">Proofing Verification Methods (<code>check_method</code>)</a>
           </h4>
+<p id="section-3.1.3-1">The values in the table below are conveyed via the <code>check_method</code> claim registered in the IANA JWT and CWT tables later in this document.<a href="#section-3.1.3-1" class="pilcrow">¶</a></p>
 <table class="center" id="table-3">
             <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
 <thead>
               <tr>
-                <th class="text-left" rowspan="1" colspan="1">Value Category</th>
-                <th class="text-left" rowspan="1" colspan="1">Example Parameter Values</th>
+                <th class="text-left" rowspan="1" colspan="1">Claim</th>
+                <th class="text-left" rowspan="1" colspan="1">Value</th>
                 <th class="text-left" rowspan="1" colspan="1">Description</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">
-                  <strong>Proofing</strong>
+                  <code>check_method</code>
 </td>
                 <td class="text-left" rowspan="1" colspan="1">
-                  <code>pipp</code>, <code>uripp</code>, <code>sripp</code>
+                  <code>pipp</code>
 </td>
-                <td class="text-left" rowspan="1" colspan="1">Physical In-Person Proofing (<code>pipp</code>), Unsupervised Remote (<code>uripp</code>), Supervised Remote (<code>sripp</code>).</td>
+                <td class="text-left" rowspan="1" colspan="1">Physical In-Person Proofing</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <code>check_method</code>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <code>uripp</code>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">Unsupervised Remote In-Person Proofing</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <code>check_method</code>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <code>sripp</code>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">Supervised Remote In-Person Proofing</td>
               </tr>
             </tbody>
           </table>
