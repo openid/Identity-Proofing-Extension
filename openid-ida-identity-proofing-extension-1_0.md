@@ -123,7 +123,7 @@ If the Verifier receives a CBOR payload over ISO 18013-7, it doesn't look for th
 
 ## The Cryptographic Security & Presentation Domain
 
-These claims carry cryptographic evidence generated at issuance or presentation time. Their purpose is to enable a Relying Party to:
+Some credential formats enables claims to carry cryptographic evidence generated at issuance or presentation time. The  purpose of these cryptographic protections is to enable a Relying Party to:
 
 - independently re-verify the Issuer’s signature (or equivalent structure),
 - confirm device-bound presentation where applicable, and
