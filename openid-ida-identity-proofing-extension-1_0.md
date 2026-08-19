@@ -22,27 +22,20 @@ organization="Independent"
 
 .# Abstract
 
-This document is a targeted profile of the Format-Agnostic Digital Identity Claims and Values 1.0 specification. It isolates and defines the globally interoperable architecture of digital identity claims and values. Crucially, this profile explicitly separates the claims related to **Identity Proofing assurance** (how the human was originally vetted by the Issuer) from the **Cryptographic Security** claims (how the assertion is protected during transit). By standardizing the semantic representation of these two distinct domains, and defining the requirements for end-to-end cryptographic non-repudiation through intermediate translation layers, this profile empowers Relying Parties (RPs) to solve the problem of executing automated, risk-defensible decisions based on strict mathematical proof.
-
+This specification is an extension of OpenID Connect for Identity Assurance Claims Registration 1.0. It defines discrete claims and values describing Identity Proofing assurance (the vetting and issuance process performed by an issuer or identity provider). By standardizing the semantic representation of these claims, this profile provides Relying Parties (RPs) with critical assurance information that enables automated risk decisions when accepting an identity credential or assertion. Considerations for evaluating the cryptographic evidence and trust architecture associated with a given presentation are addressed in Security Considerations and are left to the implementation architectures rather than defined here as normative claims.
 
 {mainmatter}
 
 
 # Introduction
 
-The digital identity ecosystem is heavily fragmented across root cryptographic formats (e.g., CBOR for ISO/IEC 18013-5 mdocs, JSON-LD for W3C VCDMs) and transport protocols.
-
-To solve the utility problem across all enterprise architectures, this specification decouples the **Claims** from the **Protocol**. It standardizes the specific claims necessary to evaluate identity proofing rigor and end-to-end non-repudiation. Implementers can natively embed these claims into edge-based binary protocols or translate them into enterprise-friendly web formats via intermediate orchestration services.
+Individuals and organizations now rely on a diverse ecosystem of identities and credentials. While this growth increases convenience and enables new forms of trusted engagement, it also introduces greater complexity for relying parties that must determine whether to trust a given identity assertion or credential. Making informed risk decisions requires additional assurance information about the process used to issue the identity assertion or credential that is being presented to an RP. This specification defines a set of identity claims and values that can represent the identity proofing process. It's anticipated that these claims can be included in an identity assertion such as OpenID Connect (OIDC) tokens or in credentials such as Verifiable Digital Credentials (VDCs). The claims in this specification empowers Relying Parties with identity evidence that supports executing automated and defensible risk decisions.
 
 # Scope
 
-This specification defines the discrete claims, data types, and enumerated values associated with:
+This specification defines discrete claims, data types, and enumerated values that represents the identity proofing and vetting executed by an issuer or identity provider during credential or identity issuance. These claims can accompany an identity credential or assertion, and are intended to be presented to relying parties during credential or assertion presentation. Claims defined in this specification are meant to be architecture and protocol agnostic. For this reason, the following items are out of scope: Transport protocols, API definitions, envelope formatting (JSON OIDC assertions, REST APIs, BLE/NFC handshakes), cryptographic evidence conveyance mechanisms (e.g., issuer-signed receipts, device-signed receipts, verifier attestations, or equivalent), and other architecture-specific delivery mechanics.
 
-1. The identity proofing and vetting phase executed by an Issuing Authority.
-2. The cryptographic pass-through evidence required to maintain non-repudiation through intermediate translation layers.
-
-**Out of Scope:** The specific transport protocol, API definitions, or envelope formatting (e.g., JSON OIDC assertions, REST APIs, BLE/NFC handshakes) used to deliver these claims. Those mechanics MUST be defined in separate, architecture-specific Profiles.
-
+Guidance for Relying Parties on evaluating the assurance of these claims is provided in the Security Considerations section.
 
 # Standardized Claims and Values Registry (Normative)
 
