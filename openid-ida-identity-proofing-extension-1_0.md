@@ -127,7 +127,7 @@ Some credential formats enables claims to carry cryptographic evidence generated
 
 - independently re-verify the Issuer’s signature (or equivalent structure),
 - confirm device-bound presentation where applicable, and
-- retain durable, format-independent evidence for non-repudiation and Examiner Defence.
+- retain verifiable evidence for non-repudiation.
 
 The claims themselves are **carriers** of the evidence. Cryptographic assurance is obtained only when the Relying Party (or a component acting on its behalf) successfully verifies the received signatures or structures against the appropriate trust anchors. The design intentionally keeps this evidence available even after the surrounding assertion has been translated into another encoding or protocol envelope.
 
