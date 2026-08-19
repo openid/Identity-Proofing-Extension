@@ -7,7 +7,7 @@
 <title>Format-Agnostic Digital Identity Claims and Values: Identity Proofing Extension 1.0 - draft 00</title>
 <meta content="Juliana Cafik" name="author">
 <meta content="
-       This document is a targeted profile of the Format-Agnostic Digital Identity Claims and Values 1.0 specification. It isolates and defines the globally interoperable architecture of digital identity claims and values. Crucially, this profile explicitly separates the claims related to  Identity Proofing assurance  (how the human was originally vetted by the Issuer) from the  Cryptographic Security  claims (how the assertion is protected during transit). By standardizing the semantic representation of these two distinct domains, and defining the requirements for end-to-end cryptographic non-repudiation through intermediate translation layers, this profile empowers Relying Parties (RPs) to solve the problem of executing automated, risk-defensible decisions based on strict mathematical proof. 
+       This specification is an extension of OpenID Connect for Identity Assurance Claims Registration 1.0. It defines discrete claims and values describing Identity Proofing assurance (the vetting and issuance process performed by an issuer or identity provider). By standardizing the semantic representation of these claims, this profile provides Relying Parties (RPs) with critical assurance information that enables automated risk decisions when accepting an identity credential or assertion. Considerations for evaluating the cryptographic evidence and trust architecture associated with a given presentation are addressed in Security Considerations and are left to the implementation architectures rather than defined here as normative claims. 
     " name="description">
 <meta content="xml2rfc 3.16.0" name="generator">
 <meta content="security" name="keyword">
@@ -1225,7 +1225,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID eKYC-IDA</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-08-12" class="published">12 August 2026</time>
+<time datetime="2026-08-19" class="published">19 August 2026</time>
     </dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
@@ -1239,7 +1239,7 @@ li > p:last-of-type:only-child {
 <h1 id="title">Format-Agnostic Digital Identity Claims and Values: Identity Proofing Extension 1.0 - draft 00</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document is a targeted profile of the Format-Agnostic Digital Identity Claims and Values 1.0 specification. It isolates and defines the globally interoperable architecture of digital identity claims and values. Crucially, this profile explicitly separates the claims related to <strong>Identity Proofing assurance</strong> (how the human was originally vetted by the Issuer) from the <strong>Cryptographic Security</strong> claims (how the assertion is protected during transit). By standardizing the semantic representation of these two distinct domains, and defining the requirements for end-to-end cryptographic non-repudiation through intermediate translation layers, this profile empowers Relying Parties (RPs) to solve the problem of executing automated, risk-defensible decisions based on strict mathematical proof.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This specification is an extension of OpenID Connect for Identity Assurance Claims Registration 1.0. It defines discrete claims and values describing Identity Proofing assurance (the vetting and issuance process performed by an issuer or identity provider). By standardizing the semantic representation of these claims, this profile provides Relying Parties (RPs) with critical assurance information that enables automated risk decisions when accepting an identity credential or assertion. Considerations for evaluating the cryptographic evidence and trust architecture associated with a given presentation are addressed in Security Considerations and are left to the implementation architectures rather than defined here as normative claims.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <div id="toc">
 <section id="section-toc.1">
@@ -1354,8 +1354,7 @@ li > p:last-of-type:only-child {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The digital identity ecosystem is heavily fragmented across root cryptographic formats (e.g., CBOR for ISO/IEC 18013-5 mdocs, JSON-LD for W3C VCDMs) and transport protocols.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">To solve the utility problem across all enterprise architectures, this specification decouples the <strong>Claims</strong> from the <strong>Protocol</strong>. It standardizes the specific claims necessary to evaluate identity proofing rigor and end-to-end non-repudiation. Implementers can natively embed these claims into edge-based binary protocols or translate them into enterprise-friendly web formats via intermediate orchestration services.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-1">Individuals and organizations now rely on a diverse ecosystem of identities and credentials. While this growth increases convenience and enables new forms of trusted engagement, it also introduces greater complexity for relying parties that must determine whether to trust a given identity assertion or credential. Making informed risk decisions requires additional assurance information about the process used to issue the identity assertion or credential that is being presented to an RP. This specification defines a set of identity claims and values that can represent the identity proofing process. It's anticipated that these claims can be included in an identity assertion such as OpenID Connect (OIDC) tokens or in credentials such as Verifiable Digital Credentials (VDCs). The claims in this specification empowers Relying Parties with identity evidence that supports executing automated and defensible risk decisions.<a href="#section-1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="scope">
@@ -1363,14 +1362,8 @@ li > p:last-of-type:only-child {
       <h2 id="name-scope">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-scope" class="section-name selfRef">Scope</a>
       </h2>
-<p id="section-2-1">This specification defines the discrete claims, data types, and enumerated values associated with:<a href="#section-2-1" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="compact type-1" id="section-2-2">
-<li id="section-2-2.1">The identity proofing and vetting phase executed by an Issuing Authority.<a href="#section-2-2.1" class="pilcrow">¶</a>
-</li>
-        <li id="section-2-2.2">The cryptographic pass-through evidence required to maintain non-repudiation through intermediate translation layers.<a href="#section-2-2.2" class="pilcrow">¶</a>
-</li>
-      </ol>
-<p id="section-2-3"><strong>Out of Scope:</strong> The specific transport protocol, API definitions, or envelope formatting (e.g., JSON OIDC assertions, REST APIs, BLE/NFC handshakes) used to deliver these claims. Those mechanics MUST be defined in separate, architecture-specific Profiles.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-1">This specification defines discrete claims, data types, and enumerated values that represents the identity proofing and vetting executed by an issuer or identity provider during credential or identity issuance. These claims can accompany an identity credential or assertion, and are intended to be presented to relying parties during credential or assertion presentation. Claims defined in this specification are meant to be architecture and protocol agnostic. For this reason, the following items are out of scope: Transport protocols, API definitions, envelope formatting (JSON OIDC assertions, REST APIs, BLE/NFC handshakes), cryptographic evidence conveyance mechanisms (e.g., issuer-signed receipts, device-signed receipts, verifier attestations, or equivalent), and other architecture-specific delivery mechanics.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">Guidance for Relying Parties on evaluating the assurance of these claims is provided in the Security Considerations section.<a href="#section-2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="standardized-claims-and-values-registry-normative">
