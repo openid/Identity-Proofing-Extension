@@ -117,17 +117,74 @@ If the Verifier receives a CBOR payload over ISO 18013-7, it doesn't look for th
 
 # Security Considerations
 
+## The Cryptographic Security & Presentation Domain
+
+Some credential formats enables claims to carry cryptographic evidence generated at issuance or presentation time. The  purpose of these cryptographic protections is to enable a Relying Party to:
+
+- independently verify the Issuer’s signature (or equivalent structure),
+- confirm device-bound presentation where applicable, and
+- retain verifiable evidence for non-repudiation.
+
+Cryptographic assurance is obtained only when the Relying Party (or a component acting on its behalf) successfully verifies the received signatures or structures against the appropriate trust anchors. The design intentionally keeps this evidence available even after the surrounding assertion has been translated into another encoding or protocol envelope.
+
+### Pass-Through Cryptographic Evidence
+
+| Claim | Data Type | Description |
+| :--- | :--- | :--- |
+| `issuer_signed_receipt` | Object/String/Binary | Carries the Issuer’s cryptographic signature (or the equivalent signed structure) over the core identity data. Allows the RP to re-verify the trust anchor independently of any intermediate translation. |
+| `device_signed_receipt` | Object/String/Binary | Carries evidence of a device-bound signature (or equivalent hardware-backed attestation) produced at presentation time. Supports proof of possession and local user intent. |
+| `verifier_signature_attestation` | Object/String/Binary | Carries a signature produced by an intermediate Verifier that binds the translated payload to the original receipts. Provides accountability for the translation step. |
+
+### Live Presentation Metrics
+
+| Claim | Data Type | Description |
+| :--- | :--- | :--- |
+| `revocation_freshness_check` | String (DateTime) | Timestamp confirming the exact moment the credential's status was validated. |
+| `revocation_freshness_method` | String | Mechanism used to validate status (e.g., `cached_vical`, `status_list`, `ocsp`, `token_status_api`). Enables the RP to assess residual risk of cache poisoning or stale status. |
+| `device_binding_verified` | Boolean | Assertion by the presenter or intermediate Verifier that the presentation key is bound to hardware. This is a claim *about* binding status, not cryptographic proof of that binding. |
+
+**Limitation.** These claims supply the cryptographic material necessary for independent verification and long-term evidence retention. They do not, by themselves, constitute a complete security proof. Correct verification of the carried signatures/structures, proper trust-anchor management, and evaluation of freshness and device-binding status remain the responsibility of the Relying Party.
+
 ## The Envelope vs. The Receipt (Format Translation Integrity)
 
-If a Relying Party utilizes an intermediate Verifier and a Translation Binding (such as OIDC JSON), the RP relies on the JSON envelope to execute immediate, automated business logic. However, the JSON envelope alone is legally insufficient for Examiner Defense, as it could be synthesized by a compromised Verifier.
+# Security Considerations
 
-The RP MUST NOT treat the JSON translation as the absolute root of trust. The RP MUST extract and archive the format-agnostic cryptographic evidence contained within the `issuer_signed_receipt` and `device_signed_receipt` fields. While the RP consumes JSON for operational speed, the retained encoded binary receipts provide the immutable proof required for KYC Examiner Defence.
+## The Envelope vs. The Receipt (Format Translation Integrity)
+
+When a Relying Party utilises an intermediate Verifier and a Translation Binding (such as OIDC JSON), the RP typically relies on the JSON envelope for immediate business logic. The JSON envelope alone is insufficient for Examiner Defence: it could be synthesised by a compromised or malicious Verifier.
+
+The RP **shall not** treat the translated JSON envelope as the sole root of trust.  
+The RP **shall** extract and archive the format-agnostic cryptographic evidence contained in the `issuer_signed_receipt` and `device_signed_receipt` fields (and, when present, `verifier_signature_attestation`).
+
+While the RP may consume the JSON translation for operational speed, the retained encoded binary (or equivalent) receipts constitute the immutable evidence required for non-repudiation and KYC Examiner Defence. This requirement applies equally to native edge presentations, pure VCDM flows, and translated OIDC flows.
 
 ## Decoupled Trust Resolution (Asynchronous Caching)
 
-To eliminate runtime network latency and protect user privacy, architectures processing these claims SHOULD decouple the transaction path from the trust list resolution path. Synchronous API calls to a Verified Issuer Certificate Authority List (VICAL) during a live transaction introduces severe availability risks. `revocation_freshness_method` MUST be evaluated by the RP to determine if the trust resolution was performed via an asynchronous, locally cached registry, a synchronous network call or the wallet itself.
+To eliminate runtime network latency and protect user privacy, architectures processing these claims **should** decouple the transaction path from the trust-list / VICAL resolution path. Synchronous API calls to a Verified Issuer Certificate Authority List (VICAL) or equivalent during a live transaction introduce availability and privacy risks.
 
-# Compliance Elements: Provenance & Jurisdictional Assurance
+The RP **shall** evaluate the `revocation_freshness_method` claim (when present) to determine whether status validation was performed via:
+
+- an asynchronous, locally cached registry,
+- a synchronous network call, or
+- the wallet / device itself.
+
+This evaluation is a necessary input to the RP’s residual-risk assessment.
+
+## Independence from End-User Attribute Claims
+
+The security requirements in this section apply to the cryptographic evidence and presentation-integrity claims defined in this specification. They are independent of whether any end-user attribute claims registered in OpenID Connect for Identity Assurance Claims Registration 1.0 are also present in the assertion.
+
+## Decoupled Trust Resolution (Asynchronous Caching)
+
+To eliminate runtime network latency and protect user privacy, architectures processing these claims **should** decouple the transaction path from the trust-list / VICAL resolution path. Synchronous API calls to a Verified Issuer Certificate Authority List (VICAL) or equivalent during a live transaction introduce availability and privacy risks.
+
+The RP **shall** evaluate the `revocation_freshness_method` claim (when present) to determine whether status validation was performed via:
+
+- an asynchronous, locally cached registry,
+- a synchronous network call, or
+- the wallet / device itself.
+
+This evaluation is a necessary input to the RP’s residual-risk assessment.# Compliance Elements: Provenance & Jurisdictional Assurance
 
 ## Namespace Enforcement
 
