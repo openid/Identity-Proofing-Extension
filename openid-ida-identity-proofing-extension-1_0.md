@@ -41,6 +41,8 @@ Guidance for Relying Parties on evaluating the assurance of these claims is prov
 
 To enable true jurisdictional agility and non-repudiation, Issuers and Verifiers MUST map local proofing terminology and downstream translation assertions to this standardized registry of claims and enumerated values. This registry is strictly divided into two operational domains: Identity Proofing and Cryptographic Security.
 
+Identity Proofing claim names and values in this specification are aligned with OpenID Identity Assurance Schema Definition 1.0 and the eKYC-IDA predefined values.
+
 ## The Identity Proofing Domain: Vetting & Assurance Claims
 
 These claims are asserted by the Issuer and describe the rigor of the initial onboarding phase.
@@ -49,18 +51,20 @@ These claims are asserted by the Issuer and describe the rigor of the initial on
 
 | Claim | Example Parameter Values | Data Type | Description |
 | :--- | :--- | :--- | :--- |
-| `context_uri` | `urn:openid:assurance:us:real_id` | String | Defines the legal or regulatory standard governing the initial proofing. |
-| `presence_equivalence` | `in_person`, `remote_supervised` | String | Indicates the context of the user's presence during the proofing phase. |
+| `trust framework` | `eidas` `Nist_800_63A``us_real_id` String | Trust Framework that governed identity proofing act issuance. This value determines how `assurance_level` is interpreted. |
+ 
+### Assurance Levels 
+`assurance_level` is interpreted only in combination with `trust_framework`. This specification does not define a framework-independent "harmonized IAL" string. Framework and level MUST NOT be concatenated into a single compound token (for example `loa:high:eu:eidas`).
 
-### Assurance Levels & Classifications
+Optional evidence-classification detail, when required by a framework, is carried in IDA `assurance_process` and is out of scope for this specification.
 
 | Claim | Example Parameter Values | Data Type | Description |
 | :--- | :--- | :--- | :--- |
-| `issuance_assurance_classification` | `loa:high:eu:eidas` | String | Asserts the vetting rigor and confidence established by the Issuer. |
+| `assurance_level` | `high` `substantial` `ial2` String |Assurance level associated with the proofed identity, as defined by the identified `trust_framework`. |
 | `proofing_level` | `ial:2`, `ip:3` | String | Harmonized mapping representing the Identity Assurance Level (IAL). |
 
 ### Proofing Verification Methods (`check_method`)
-The values in the table below are conveyed via the `check_method` claim registered in the IANA JWT and CWT tables later in this document.
+The values in the table below are conveyed via the `check_method` claim registered in the IANA JWT and CWT tables later in this document. Presence of the subject during proofing is determined by `check_method` and SHALL NOT be separately asserted.
 
 | Claim | Value | Description |
 | :--- | :--- | :--- |
