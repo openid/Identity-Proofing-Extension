@@ -92,7 +92,7 @@ These claims establish the active trust architecture at the moment of presentati
 
 | Claim | Data Type | Description |
 | :--- | :--- | :--- |
-| `revocation_freshness_check` | String (DateTime) | Timestamp confirming the exact moment the credential's status was validated. |
+| `revocation_freshness_check` | String (RFC 3339 DateTime) | Timestamp confirming the exact moment the credential's status was validated. Must use YYYY-MM-DDThh:mm:ssTZD per RFC 3339 (a profile of ISO 8601) with a required timezone designator, consistent with IDA's verification.time — not an RFC 7519 NumericDate (which applies to exp/iat).|
 | `revocation_freshness_method` | String | Mechanism used to validate status (e.g., `cached_vical`, `status_list`, `ocsp`, `token_status_api`), determining the risk of cache poisoning. |
 | `device_binding_verified` | Boolean | Declares whether the presentation key is bound securely to physical hardware (`TRUE`/`FALSE`). |
 
