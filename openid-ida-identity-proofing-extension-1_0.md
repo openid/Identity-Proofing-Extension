@@ -148,6 +148,13 @@ Cryptographic assurance is obtained only when the Relying Party (or a component 
 ## The Envelope vs. The Receipt (Format Translation Integrity)
 
 # Security Considerations
+While this specification defines claims meant to provide Relying Parties with assurance information about a given credential or assertion, it does not define the architecture, trust model, or cryptographic properties needed to verify the assurance of the claims themselves. Depending on the use case and trust architecture, Relying Parties need to determine the credential types and cryptographic validity and integrity protections needed to accept a given credential or assertion.
+This section provides security considerations for relying parties when evaluating and accepting the claims defined in this specification. The security considerations outlined assume that claims are provided to a relying party either as attributes in an identity credential, such as a verifiable digital credential, or as part of an identity assertion, such as an Open ID Connect token. The security controls chosen will be greatly impacted by relying party risk tolerance and the architecture between the issuer/identity provider, the verifier and the relying party. For example, some relying parties may require the credential or assertion to be signed by the issuer/identity provider, while others may rely only on an encrypted channel for trust conveyance. 
+
+Where cryptographic evidence is used to support a risk-based decision, its conveyance, retention, and format are implementation-specific and are left to the applicable architecture and trust framework rather than defined as normative claims in this document. This section does highlight examples of how normative claims currently in the IDA specification can be used to express the security properties of how an assertion or credential was cryptographically protected during transport and verified. 
+
+## Certification
+This section will talk about security considerations agnostic of IdP, Issuer, Wallet or Verifier certification. However, it’s worth noting that current and evolving third-party certification regimes for identity infrastructure may impact the claims relying parties choose to accept. For example, a single claim that attests to an issuer’s identity proofing process being certified against accepted requirements may replace the need for several, granular claims about the mechanism and controls used in the proofing process. Relying parties should evaluate availability and applicability of certification when assessing the risk of accepting identity and assurance claims.
 
 ## The Envelope vs. The Receipt (Format Translation Integrity)
 
