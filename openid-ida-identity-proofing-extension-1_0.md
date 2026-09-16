@@ -84,14 +84,6 @@ To enable cross-format interoperability of proofing claims, implementations MUST
 
 These claims establish the active trust architecture at the moment of presentation, providing an Examiner Defense against synthetic mimicry and proxy compromise.
 
-### Pass-Through Cryptographic Evidence
-
-| Claim | Data Type | Description |
-| :--- | :--- | :--- |
-| `issuer_signed_receipt` | Object/String/Binary | The raw structure (e.g., `IssuerSigned` block) from the root token, allowing the RP to independently verify the trust anchor. |
-| `device_signed_receipt` | Object/String/Binary | The raw structure (e.g., `DeviceSigned` block), proving a localized hardware unlock occurred and enforcing strict non-repudiation. |
-| `verifier_signature_attestation` | Object/String/Binary | Cryptographic signature of an intermediate Verifier (if used), binding a translated payload to the root receipts. |
-
 ### Live Presentation Metrics
 
 | Claim | Data Type | Description |
