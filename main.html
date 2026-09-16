@@ -1301,22 +1301,25 @@ li > p:last-of-type:only-child {
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
-                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-the-envelope-vs-the-receipt" class="internal xref">The Envelope vs. The Receipt (Format Translation Integrity)</a></p>
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-certification" class="internal xref">Certification</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
-                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-decoupled-trust-resolution-" class="internal xref">Decoupled Trust Resolution (Asynchronous Caching)</a></p>
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-the-envelope-vs-the-receipt" class="internal xref">The Envelope vs. The Receipt (Format Translation Integrity)</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
-                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-independence-from-end-user-" class="internal xref">Independence from End-User Attribute Claims</a></p>
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-decoupled-trust-resolution-" class="internal xref">Decoupled Trust Resolution (Asynchronous Caching)</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
-                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-decoupled-trust-resolution-a" class="internal xref">Decoupled Trust Resolution (Asynchronous Caching)</a></p>
+                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-independence-from-end-user-" class="internal xref">Independence from End-User Attribute Claims</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5">
-                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="auto internal xref">5.5</a>.  <a href="#name-namespace-enforcement" class="internal xref">Namespace Enforcement</a></p>
+                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="auto internal xref">5.5</a>.  <a href="#name-decoupled-trust-resolution-a" class="internal xref">Decoupled Trust Resolution (Asynchronous Caching)</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.6">
-                <p id="section-toc.1-1.5.2.6.1"><a href="#section-5.6" class="auto internal xref">5.6</a>.  <a href="#name-selective-disclosure-reques" class="internal xref">Selective Disclosure Request</a></p>
+                <p id="section-toc.1-1.5.2.6.1"><a href="#section-5.6" class="auto internal xref">5.6</a>.  <a href="#name-namespace-enforcement" class="internal xref">Namespace Enforcement</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.7">
+                <p id="section-toc.1-1.5.2.7.1"><a href="#section-5.7" class="auto internal xref">5.7</a>.  <a href="#name-selective-disclosure-reques" class="internal xref">Selective Disclosure Request</a></p>
 </li>
             </ul>
 </li>
@@ -1636,75 +1639,86 @@ If the Verifier receives a CBOR payload over ISO 18013-7, it doesn't look for th
       <h2 id="name-security-considerations">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<div id="the-envelope-vs-the-receipt-format-translation-integrity">
+<p id="section-5-1">While this specification defines claims meant to provide Relying Parties with assurance information about a given credential or assertion, it does not define the architecture, trust model, or cryptographic properties needed to verify the assurance of the claims themselves. Depending on the use case and trust architecture, Relying Parties need to determine the credential types and cryptographic validity and integrity protections needed to accept a given credential or assertion.
+This section provides security considerations for relying parties when evaluating and accepting the claims defined in this specification. The security considerations outlined assume that claims are provided to a relying party either as attributes in an identity credential, such as a verifiable digital credential, or as part of an identity assertion, such as an Open ID Connect token. The security controls chosen will be greatly impacted by relying party risk tolerance and the architecture between the issuer/identity provider, the verifier and the relying party. For example, some relying parties may require the credential or assertion to be signed by the issuer/identity provider, while others may rely only on an encrypted channel for trust conveyance.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">Where cryptographic evidence is used to support a risk-based decision, its conveyance, retention, and format are implementation-specific and are left to the applicable architecture and trust framework rather than defined as normative claims in this document. This section does highlight examples of how normative claims currently in the IDA specification can be used to express the security properties of how an assertion or credential was cryptographically protected during transport and verified.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<div id="certification">
 <section id="section-5.1">
-        <h3 id="name-the-envelope-vs-the-receipt">
-<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-the-envelope-vs-the-receipt" class="section-name selfRef">The Envelope vs. The Receipt (Format Translation Integrity)</a>
+        <h3 id="name-certification">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-certification" class="section-name selfRef">Certification</a>
         </h3>
-<p id="section-5.1-1">When a Relying Party utilises an intermediate Verifier and a Translation Binding (such as OIDC JSON), the RP typically relies on the JSON envelope for immediate business logic. The JSON envelope alone is insufficient for Examiner Defence: it could be synthesised by a compromised or malicious Verifier.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">The RP <strong>shall not</strong> treat the translated JSON envelope as the sole root of trust.<br>
-The RP <strong>shall</strong> extract and archive the format-agnostic cryptographic evidence contained in the <code>issuer_signed_receipt</code> and <code>device_signed_receipt</code> fields (and, when present, <code>verifier_signature_attestation</code>).<a href="#section-5.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.1-3">While the RP may consume the JSON translation for operational speed, the retained encoded binary (or equivalent) receipts constitute the immutable evidence required for non-repudiation and KYC Examiner Defence. This requirement applies equally to native edge presentations, pure VCDM flows, and translated OIDC flows.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1-1">This section will talk about security considerations agnostic of IdP, Issuer, Wallet or Verifier certification. However, it’s worth noting that current and evolving third-party certification regimes for identity infrastructure may impact the claims relying parties choose to accept. For example, a single claim that attests to an issuer’s identity proofing process being certified against accepted requirements may replace the need for several, granular claims about the mechanism and controls used in the proofing process. Relying parties should evaluate availability and applicability of certification when assessing the risk of accepting identity and assurance claims.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="the-envelope-vs-the-receipt-format-translation-integrity">
+<section id="section-5.2">
+        <h3 id="name-the-envelope-vs-the-receipt">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-the-envelope-vs-the-receipt" class="section-name selfRef">The Envelope vs. The Receipt (Format Translation Integrity)</a>
+        </h3>
+<p id="section-5.2-1">When a Relying Party utilises an intermediate Verifier and a Translation Binding (such as OIDC JSON), the RP typically relies on the JSON envelope for immediate business logic. The JSON envelope alone is insufficient for Examiner Defence: it could be synthesised by a compromised or malicious Verifier.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">The RP <strong>shall not</strong> treat the translated JSON envelope as the sole root of trust.<br>
+The RP <strong>shall</strong> extract and archive the format-agnostic cryptographic evidence contained in the <code>issuer_signed_receipt</code> and <code>device_signed_receipt</code> fields (and, when present, <code>verifier_signature_attestation</code>).<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-3">While the RP may consume the JSON translation for operational speed, the retained encoded binary (or equivalent) receipts constitute the immutable evidence required for non-repudiation and KYC Examiner Defence. This requirement applies equally to native edge presentations, pure VCDM flows, and translated OIDC flows.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="decoupled-trust-resolution-asynchronous-caching">
-<section id="section-5.2">
+<section id="section-5.3">
         <h3 id="name-decoupled-trust-resolution-">
-<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-decoupled-trust-resolution-" class="section-name selfRef">Decoupled Trust Resolution (Asynchronous Caching)</a>
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-decoupled-trust-resolution-" class="section-name selfRef">Decoupled Trust Resolution (Asynchronous Caching)</a>
         </h3>
-<p id="section-5.2-1">To eliminate runtime network latency and protect user privacy, architectures processing these claims <strong>should</strong> decouple the transaction path from the trust-list / VICAL resolution path. Synchronous API calls to a Verified Issuer Certificate Authority List (VICAL) or equivalent during a live transaction introduce availability and privacy risks.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2-2">The RP <strong>shall</strong> evaluate the <code>revocation_freshness_method</code> claim (when present) to determine whether status validation was performed via:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.3-1">To eliminate runtime network latency and protect user privacy, architectures processing these claims <strong>should</strong> decouple the transaction path from the trust-list / VICAL resolution path. Synchronous API calls to a Verified Issuer Certificate Authority List (VICAL) or equivalent during a live transaction introduce availability and privacy risks.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">The RP <strong>shall</strong> evaluate the <code>revocation_freshness_method</code> claim (when present) to determine whether status validation was performed via:<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="section-5.2-3.1">an asynchronous, locally cached registry,<a href="#section-5.2-3.1" class="pilcrow">¶</a>
+<li class="compact" id="section-5.3-3.1">an asynchronous, locally cached registry,<a href="#section-5.3-3.1" class="pilcrow">¶</a>
 </li>
-          <li class="compact" id="section-5.2-3.2">a synchronous network call, or<a href="#section-5.2-3.2" class="pilcrow">¶</a>
+          <li class="compact" id="section-5.3-3.2">a synchronous network call, or<a href="#section-5.3-3.2" class="pilcrow">¶</a>
 </li>
-          <li class="compact" id="section-5.2-3.3">the wallet / device itself.<a href="#section-5.2-3.3" class="pilcrow">¶</a>
+          <li class="compact" id="section-5.3-3.3">the wallet / device itself.<a href="#section-5.3-3.3" class="pilcrow">¶</a>
 </li>
         </ul>
-<p id="section-5.2-4">This evaluation is a necessary input to the RP’s residual-risk assessment.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
+<p id="section-5.3-4">This evaluation is a necessary input to the RP’s residual-risk assessment.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="independence-from-end-user-attribute-claims">
-<section id="section-5.3">
+<section id="section-5.4">
         <h3 id="name-independence-from-end-user-">
-<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-independence-from-end-user-" class="section-name selfRef">Independence from End-User Attribute Claims</a>
+<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-independence-from-end-user-" class="section-name selfRef">Independence from End-User Attribute Claims</a>
         </h3>
-<p id="section-5.3-1">The security requirements in this section apply to the cryptographic evidence and presentation-integrity claims defined in this specification. They are independent of whether any end-user attribute claims registered in OpenID Connect for Identity Assurance Claims Registration 1.0 are also present in the assertion.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.4-1">The security requirements in this section apply to the cryptographic evidence and presentation-integrity claims defined in this specification. They are independent of whether any end-user attribute claims registered in OpenID Connect for Identity Assurance Claims Registration 1.0 are also present in the assertion.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="decoupled-trust-resolution-asynchronous-caching-1">
-<section id="section-5.4">
+<section id="section-5.5">
         <h3 id="name-decoupled-trust-resolution-a">
-<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-decoupled-trust-resolution-a" class="section-name selfRef">Decoupled Trust Resolution (Asynchronous Caching)</a>
+<a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-decoupled-trust-resolution-a" class="section-name selfRef">Decoupled Trust Resolution (Asynchronous Caching)</a>
         </h3>
-<p id="section-5.4-1">To eliminate runtime network latency and protect user privacy, architectures processing these claims <strong>should</strong> decouple the transaction path from the trust-list / VICAL resolution path. Synchronous API calls to a Verified Issuer Certificate Authority List (VICAL) or equivalent during a live transaction introduce availability and privacy risks.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
-<p id="section-5.4-2">The RP <strong>shall</strong> evaluate the <code>revocation_freshness_method</code> claim (when present) to determine whether status validation was performed via:<a href="#section-5.4-2" class="pilcrow">¶</a></p>
+<p id="section-5.5-1">To eliminate runtime network latency and protect user privacy, architectures processing these claims <strong>should</strong> decouple the transaction path from the trust-list / VICAL resolution path. Synchronous API calls to a Verified Issuer Certificate Authority List (VICAL) or equivalent during a live transaction introduce availability and privacy risks.<a href="#section-5.5-1" class="pilcrow">¶</a></p>
+<p id="section-5.5-2">The RP <strong>shall</strong> evaluate the <code>revocation_freshness_method</code> claim (when present) to determine whether status validation was performed via:<a href="#section-5.5-2" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="section-5.4-3.1">an asynchronous, locally cached registry,<a href="#section-5.4-3.1" class="pilcrow">¶</a>
+<li class="compact" id="section-5.5-3.1">an asynchronous, locally cached registry,<a href="#section-5.5-3.1" class="pilcrow">¶</a>
 </li>
-          <li class="compact" id="section-5.4-3.2">a synchronous network call, or<a href="#section-5.4-3.2" class="pilcrow">¶</a>
+          <li class="compact" id="section-5.5-3.2">a synchronous network call, or<a href="#section-5.5-3.2" class="pilcrow">¶</a>
 </li>
-          <li class="compact" id="section-5.4-3.3">the wallet / device itself.<a href="#section-5.4-3.3" class="pilcrow">¶</a>
+          <li class="compact" id="section-5.5-3.3">the wallet / device itself.<a href="#section-5.5-3.3" class="pilcrow">¶</a>
 </li>
         </ul>
-<p id="section-5.4-4">This evaluation is a necessary input to the RP’s residual-risk assessment.# Compliance Elements: Provenance &amp; Jurisdictional Assurance<a href="#section-5.4-4" class="pilcrow">¶</a></p>
+<p id="section-5.5-4">This evaluation is a necessary input to the RP’s residual-risk assessment.# Compliance Elements: Provenance &amp; Jurisdictional Assurance<a href="#section-5.5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="namespace-enforcement">
-<section id="section-5.5">
+<section id="section-5.6">
         <h3 id="name-namespace-enforcement">
-<a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-namespace-enforcement" class="section-name selfRef">Namespace Enforcement</a>
+<a href="#section-5.6" class="section-number selfRef">5.6. </a><a href="#name-namespace-enforcement" class="section-name selfRef">Namespace Enforcement</a>
         </h3>
-<p id="section-5.5-1">Establish a standardized, format-agnostic namespace (e.g., <code>org.openid.ida.assurance.1</code>) that Issuers MUST incorporate natively into the credential to explicitly declare the proofing standards met.<a href="#section-5.5-1" class="pilcrow">¶</a></p>
+<p id="section-5.6-1">Establish a standardized, format-agnostic namespace (e.g., <code>org.openid.ida.assurance.1</code>) that Issuers MUST incorporate natively into the credential to explicitly declare the proofing standards met.<a href="#section-5.6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="selective-disclosure-request">
-<section id="section-5.6">
+<section id="section-5.7">
         <h3 id="name-selective-disclosure-reques">
-<a href="#section-5.6" class="section-number selfRef">5.6. </a><a href="#name-selective-disclosure-reques" class="section-name selfRef">Selective Disclosure Request</a>
+<a href="#section-5.7" class="section-number selfRef">5.7. </a><a href="#name-selective-disclosure-reques" class="section-name selfRef">Selective Disclosure Request</a>
         </h3>
-<p id="section-5.6-1">RPs SHOULD explicitly request proofing data elements from this namespace via Selective Disclosure during the presentation phase to evaluate the native assurance level of the Issuer's vetting process prior to full PII payload presentation and extraction.<a href="#section-5.6-1" class="pilcrow">¶</a></p>
+<p id="section-5.7-1">RPs SHOULD explicitly request proofing data elements from this namespace via Selective Disclosure during the presentation phase to evaluate the native assurance level of the Issuer's vetting process prior to full PII payload presentation and extraction.<a href="#section-5.7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
