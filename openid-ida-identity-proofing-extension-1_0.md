@@ -41,6 +41,8 @@ Guidance for Relying Parties on evaluating the assurance of these claims is prov
 
 To enable true jurisdictional agility and non-repudiation, Issuers and Verifiers MUST map local proofing terminology and downstream translation assertions to this standardized registry of claims and enumerated values. This registry is strictly divided into two operational domains: Identity Proofing and Cryptographic Security.
 
+Identity Proofing claim names and values in this specification are aligned with OpenID Identity Assurance Schema Definition 1.0 and the eKYC-IDA predefined values.
+
 ## The Identity Proofing Domain: Vetting & Assurance Claims
 
 These claims are asserted by the Issuer and describe the rigor of the initial onboarding phase.
@@ -49,18 +51,20 @@ These claims are asserted by the Issuer and describe the rigor of the initial on
 
 | Claim | Example Parameter Values | Data Type | Description |
 | :--- | :--- | :--- | :--- |
-| `context_uri` | `urn:openid:assurance:us:real_id` | String | Defines the legal or regulatory standard governing the initial proofing. |
-| `presence_equivalence` | `in_person`, `remote_supervised` | String | Indicates the context of the user's presence during the proofing phase. |
+| `trust framework` | `eidas` `Nist_800_63A``us_real_id` String | Trust Framework that governed identity proofing act issuance. This value determines how `assurance_level` is interpreted. |
+ 
+### Assurance Levels 
+`assurance_level` is interpreted only in combination with `trust_framework`. This specification does not define a framework-independent "harmonized IAL" string. Framework and level MUST NOT be concatenated into a single compound token (for example `loa:high:eu:eidas`).
 
-### Assurance Levels & Classifications
+Optional evidence-classification detail, when required by a framework, is carried in IDA `assurance_process` and is out of scope for this specification.
 
 | Claim | Example Parameter Values | Data Type | Description |
 | :--- | :--- | :--- | :--- |
-| `issuance_assurance_classification` | `loa:high:eu:eidas` | String | Asserts the vetting rigor and confidence established by the Issuer. |
+| `assurance_level` | `high` `substantial` `ial2` String |Assurance level associated with the proofed identity, as defined by the identified `trust_framework`. |
 | `proofing_level` | `ial:2`, `ip:3` | String | Harmonized mapping representing the Identity Assurance Level (IAL). |
 
 ### Proofing Verification Methods (`check_method`)
-The values in the table below are conveyed via the `check_method` claim registered in the IANA JWT and CWT tables later in this document.
+The values in the table below are conveyed via the `check_method` claim registered in the IANA JWT and CWT tables later in this document. Presence of the subject during proofing is determined by `check_method` and SHALL NOT be separately asserted.
 
 | Claim | Value | Description |
 | :--- | :--- | :--- |
@@ -114,38 +118,6 @@ When a Verifier sits between the Wallet and a Relying Party's enterprise backend
 If the Verifier receives a CBOR payload over ISO 18013-7, it doesn't look for the string "proofing_level". It parses the binary for the assigned integer key (e.g., -260). Upon validating the math, it cross-references this IANA registry, sees that -260 perfectly maps to the JWT claim "proofing_level", and injects that string into the normalized OpenID Connect JSON envelope for the Relying Party. This ensures complete semantic parity between the physical edge and the enterprise web.
 
 * **Encoding Mandate:** When utilizing a JSON translation binding, all non-JSON cryptographic structures (e.g., CBOR MSO blocks) mapped to `issuer_signed_receipt` and `device_signed_receipt` MUST be encoded (e.g., Base64URL) to allow safe nesting within the JSON envelope.
-
-# Security Considerations
-
-## The Cryptographic Security & Presentation Domain
-
-Some credential formats enables claims to carry cryptographic evidence generated at issuance or presentation time. The  purpose of these cryptographic protections is to enable a Relying Party to:
-
-- independently verify the Issuer’s signature (or equivalent structure),
-- confirm device-bound presentation where applicable, and
-- retain verifiable evidence for non-repudiation.
-
-Cryptographic assurance is obtained only when the Relying Party (or a component acting on its behalf) successfully verifies the received signatures or structures against the appropriate trust anchors. The design intentionally keeps this evidence available even after the surrounding assertion has been translated into another encoding or protocol envelope.
-
-### Pass-Through Cryptographic Evidence
-
-| Claim | Data Type | Description |
-| :--- | :--- | :--- |
-| `issuer_signed_receipt` | Object/String/Binary | Carries the Issuer’s cryptographic signature (or the equivalent signed structure) over the core identity data. Allows the RP to re-verify the trust anchor independently of any intermediate translation. |
-| `device_signed_receipt` | Object/String/Binary | Carries evidence of a device-bound signature (or equivalent hardware-backed attestation) produced at presentation time. Supports proof of possession and local user intent. |
-| `verifier_signature_attestation` | Object/String/Binary | Carries a signature produced by an intermediate Verifier that binds the translated payload to the original receipts. Provides accountability for the translation step. |
-
-### Live Presentation Metrics
-
-| Claim | Data Type | Description |
-| :--- | :--- | :--- |
-| `revocation_freshness_check` | String (DateTime) | Timestamp confirming the exact moment the credential's status was validated. |
-| `revocation_freshness_method` | String | Mechanism used to validate status (e.g., `cached_vical`, `status_list`, `ocsp`, `token_status_api`). Enables the RP to assess residual risk of cache poisoning or stale status. |
-| `device_binding_verified` | Boolean | Assertion by the presenter or intermediate Verifier that the presentation key is bound to hardware. This is a claim *about* binding status, not cryptographic proof of that binding. |
-
-**Limitation.** These claims supply the cryptographic material necessary for independent verification and long-term evidence retention. They do not, by themselves, constitute a complete security proof. Correct verification of the carried signatures/structures, proper trust-anchor management, and evaluation of freshness and device-binding status remain the responsibility of the Relying Party.
-
-## The Envelope vs. The Receipt (Format Translation Integrity)
 
 # Security Considerations
 While this specification defines claims meant to provide Relying Parties with assurance information about a given credential or assertion, it does not define the architecture, trust model, or cryptographic properties needed to verify the assurance of the claims themselves. Depending on the use case and trust architecture, Relying Parties need to determine the credential types and cryptographic validity and integrity protections needed to accept a given credential or assertion.
