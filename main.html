@@ -1277,10 +1277,7 @@ li > p:last-of-type:only-child {
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-the-cryptographic-security-" class="internal xref">The Cryptographic Security &amp; Presentation Domain</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
-                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-pass-through-cryptographic-" class="internal xref">Pass-Through Cryptographic Evidence</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.2">
-                    <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="auto internal xref">3.2.2</a>.  <a href="#name-live-presentation-metrics" class="internal xref">Live Presentation Metrics</a></p>
+                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-live-presentation-metrics" class="internal xref">Live Presentation Metrics</a></p>
 </li>
                 </ul>
 </li>
@@ -1518,53 +1515,13 @@ li > p:last-of-type:only-child {
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-the-cryptographic-security-" class="section-name selfRef">The Cryptographic Security &amp; Presentation Domain</a>
         </h3>
 <p id="section-3.2-1">These claims establish the active trust architecture at the moment of presentation, providing an Examiner Defense against synthetic mimicry and proxy compromise.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<div id="pass-through-cryptographic-evidence">
+<div id="live-presentation-metrics">
 <section id="section-3.2.1">
-          <h4 id="name-pass-through-cryptographic-">
-<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-pass-through-cryptographic-" class="section-name selfRef">Pass-Through Cryptographic Evidence</a>
+          <h4 id="name-live-presentation-metrics">
+<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-live-presentation-metrics" class="section-name selfRef">Live Presentation Metrics</a>
           </h4>
 <table class="center" id="table-4">
             <caption><a href="#table-4" class="selfRef">Table 4</a></caption>
-<thead>
-              <tr>
-                <th class="text-left" rowspan="1" colspan="1">Claim</th>
-                <th class="text-left" rowspan="1" colspan="1">Data Type</th>
-                <th class="text-left" rowspan="1" colspan="1">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">
-                  <code>issuer_signed_receipt</code>
-</td>
-                <td class="text-left" rowspan="1" colspan="1">Object/String/Binary</td>
-                <td class="text-left" rowspan="1" colspan="1">The raw structure (e.g., <code>IssuerSigned</code> block) from the root token, allowing the RP to independently verify the trust anchor.</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">
-                  <code>device_signed_receipt</code>
-</td>
-                <td class="text-left" rowspan="1" colspan="1">Object/String/Binary</td>
-                <td class="text-left" rowspan="1" colspan="1">The raw structure (e.g., <code>DeviceSigned</code> block), proving a localized hardware unlock occurred and enforcing strict non-repudiation.</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">
-                  <code>verifier_signature_attestation</code>
-</td>
-                <td class="text-left" rowspan="1" colspan="1">Object/String/Binary</td>
-                <td class="text-left" rowspan="1" colspan="1">Cryptographic signature of an intermediate Verifier (if used), binding a translated payload to the root receipts.</td>
-              </tr>
-            </tbody>
-          </table>
-</section>
-</div>
-<div id="live-presentation-metrics">
-<section id="section-3.2.2">
-          <h4 id="name-live-presentation-metrics">
-<a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-live-presentation-metrics" class="section-name selfRef">Live Presentation Metrics</a>
-          </h4>
-<table class="center" id="table-5">
-            <caption><a href="#table-5" class="selfRef">Table 5</a></caption>
 <thead>
               <tr>
                 <th class="text-left" rowspan="1" colspan="1">Claim</th>
@@ -1737,8 +1694,8 @@ The RP <strong>shall</strong> extract and archive the format-agnostic cryptograp
 <p id="section-6.1-2"><strong>Registry Name:</strong> JSON Web Token Claims
 <strong>Change Controller:</strong> OpenID Foundation
 <strong>Specification Document:</strong> [[ This Document ]]<a href="#section-6.1-2" class="pilcrow">¶</a></p>
-<table class="center" id="table-6">
-          <caption><a href="#table-6" class="selfRef">Table 6</a></caption>
+<table class="center" id="table-5">
+          <caption><a href="#table-5" class="selfRef">Table 5</a></caption>
 <thead>
             <tr>
               <th class="text-left" rowspan="1" colspan="1">Claim Name</th>
@@ -1801,8 +1758,8 @@ The RP <strong>shall</strong> extract and archive the format-agnostic cryptograp
 <p id="section-6.2-2">Registry Name: CBOR Web Token (CWT) Claims
 Change Controller: OpenID Foundation (or IETF, depending on the final submission track)
 Specification Document: [[ This Document ]]<a href="#section-6.2-2" class="pilcrow">¶</a></p>
-<table class="center" id="table-7">
-          <caption><a href="#table-7" class="selfRef">Table 7</a></caption>
+<table class="center" id="table-6">
+          <caption><a href="#table-6" class="selfRef">Table 6</a></caption>
 <thead>
             <tr>
               <th class="text-left" rowspan="1" colspan="1">Claim Name</th>
