@@ -1534,8 +1534,8 @@ li > p:last-of-type:only-child {
                 <td class="text-left" rowspan="1" colspan="1">
                   <code>revocation_freshness_check</code>
 </td>
-                <td class="text-left" rowspan="1" colspan="1">String (DateTime)</td>
-                <td class="text-left" rowspan="1" colspan="1">Timestamp confirming the exact moment the credential's status was validated.</td>
+                <td class="text-left" rowspan="1" colspan="1">String (RFC 3339 DateTime)</td>
+                <td class="text-left" rowspan="1" colspan="1">Timestamp confirming the exact moment the credential's status was validated. Must use YYYY-MM-DDThh:mm:ssTZD per RFC 3339 (a profile of ISO 8601) with a required timezone designator, consistent with IDA's verification.time - not an RFC 7519 NumericDate (which applies to exp/iat).</td>
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">
