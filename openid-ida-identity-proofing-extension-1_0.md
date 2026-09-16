@@ -121,38 +121,6 @@ If the Verifier receives a CBOR payload over ISO 18013-7, it doesn't look for th
 
 # Security Considerations
 
-## The Cryptographic Security & Presentation Domain
-
-Some credential formats enables claims to carry cryptographic evidence generated at issuance or presentation time. The  purpose of these cryptographic protections is to enable a Relying Party to:
-
-- independently verify the Issuer’s signature (or equivalent structure),
-- confirm device-bound presentation where applicable, and
-- retain verifiable evidence for non-repudiation.
-
-Cryptographic assurance is obtained only when the Relying Party (or a component acting on its behalf) successfully verifies the received signatures or structures against the appropriate trust anchors. The design intentionally keeps this evidence available even after the surrounding assertion has been translated into another encoding or protocol envelope.
-
-### Pass-Through Cryptographic Evidence
-
-| Claim | Data Type | Description |
-| :--- | :--- | :--- |
-| `issuer_signed_receipt` | Object/String/Binary | Carries the Issuer’s cryptographic signature (or the equivalent signed structure) over the core identity data. Allows the RP to re-verify the trust anchor independently of any intermediate translation. |
-| `device_signed_receipt` | Object/String/Binary | Carries evidence of a device-bound signature (or equivalent hardware-backed attestation) produced at presentation time. Supports proof of possession and local user intent. |
-| `verifier_signature_attestation` | Object/String/Binary | Carries a signature produced by an intermediate Verifier that binds the translated payload to the original receipts. Provides accountability for the translation step. |
-
-### Live Presentation Metrics
-
-| Claim | Data Type | Description |
-| :--- | :--- | :--- |
-| `revocation_freshness_check` | String (DateTime) | Timestamp confirming the exact moment the credential's status was validated. |
-| `revocation_freshness_method` | String | Mechanism used to validate status (e.g., `cached_vical`, `status_list`, `ocsp`, `token_status_api`). Enables the RP to assess residual risk of cache poisoning or stale status. |
-| `device_binding_verified` | Boolean | Assertion by the presenter or intermediate Verifier that the presentation key is bound to hardware. This is a claim *about* binding status, not cryptographic proof of that binding. |
-
-**Limitation.** These claims supply the cryptographic material necessary for independent verification and long-term evidence retention. They do not, by themselves, constitute a complete security proof. Correct verification of the carried signatures/structures, proper trust-anchor management, and evaluation of freshness and device-binding status remain the responsibility of the Relying Party.
-
-## The Envelope vs. The Receipt (Format Translation Integrity)
-
-# Security Considerations
-
 ## The Envelope vs. The Receipt (Format Translation Integrity)
 
 When a Relying Party utilises an intermediate Verifier and a Translation Binding (such as OIDC JSON), the RP typically relies on the JSON envelope for immediate business logic. The JSON envelope alone is insufficient for Examiner Defence: it could be synthesised by a compromised or malicious Verifier.
